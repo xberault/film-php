@@ -2,15 +2,15 @@
 
 class Movie{
     private $id;
-    private $name;
+    private $title;
     private $date;
     private $author;
     private $gender;
     private $desc;
 
-    public function __construct($id = 0, $name, $date, $author, $gender,$desc="", $img=""){
+    public function __construct($id = 0, $title, $date, $author, $gender,$desc="", $img=""){
         $this->id = $id;
-        $this->name = $name;
+        $this->title = $title;
         $this->date = $date;
         $this->author = $author;
         $this->gender = $gender;
@@ -28,16 +28,56 @@ class Movie{
                 <a type="button" class="btn float-right" href="src/editForm.php?id={$this->id}" method="get" >
                     <i class="fas fa-edit"></i>
                 </a>
-                <h5 class="card-title" >{$this->name} </h5>
-                <p class="card-text"> {$this->date}</p>
+                <h5 class="card-title" ><b>{$this->title}</b> </h5>
+                <p class="card-text"><em>{$this->author}</em> en {$this->date}</p>
                 <p class="card-text"> {$this->desc}</p>
             </section>
         </li>
         EOT;
     }
 
-    public function getName(){
-    return $this-> name;
+    public function getTitle(){
+    return $this-> title;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDesc(): string
+    {
+        return $this->desc;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
     }
 }
 
