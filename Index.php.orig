@@ -62,7 +62,7 @@ header('Access-Control-Expose-Headers: X-Events');
     echo "<ul class='list-inline'>";
 
     foreach ($_SESSION['movieList'] as $movie) {
-        $movie->render();
+        $movie -> render();
     }
     echo "</ul>";
 
