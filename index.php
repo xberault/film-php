@@ -1,6 +1,6 @@
 <?php
 // be sure to require before session start ;)
-require_once 'src/movie.php';    // name date author gender
+include_once 'src/movie.php';    // name date author gender
 
 session_set_cookie_params('15');  // keep session opened for 15 seconds
 session_start(); // session start allow to save data so always in first
@@ -13,8 +13,6 @@ header('Access-Control-Expose-Headers: X-Events');
 ?>
 <!doctype html>
 <html>
-
-<body>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -66,8 +64,8 @@ header('Access-Control-Expose-Headers: X-Events');
     }
     echo "</ul>";
 
-
     ?>
 
-
 </main>
+</body>
+</html>
