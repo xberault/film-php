@@ -19,17 +19,15 @@ header('Access-Control-Expose-Headers: X-Events');
     <link rel="stylesheet" href="index.css">
     <script src="https://kit.fontawesome.com/56083ee0c6.js" crossorigin="anonymous"></script>
 </head>
-<header>
+<header class="bg-info shadow-sm">
+        <h1> FlixTube </h1>
 </header>
 <body class="text-left">
-<main class='   container'>
-    <header
-    ">
-    <h1> FlixTube </h1>
-    </header>
+<main class='container'>
 
-    <form method="get" action="src/search.php">
-        <select name="filter">
+    <form class="form-group w-25" method="get" action="src/filter.php">
+        <input class="form-control" type="text" name="query" />
+        <select  name="filter">
             <option value="" disabled>Trier par</option>
             <option value="titre" <?php echo (isset($_GET['filter']) && $_GET['filter'] === 'titre') ? 'selected' : ''; ?>>
                 titre
@@ -40,7 +38,7 @@ header('Access-Control-Expose-Headers: X-Events');
             <option value="auteur" <?php echo (isset($_GET['filter']) && $_GET['filter'] === 'auteur') ? 'selected' : ''; ?>>
                 auteur
             </option>
-            <input class="btn-secondary" type="submit" value="filtrer">
+            <input class="btn-secondary" type="submit" value="search">
         </select>
     </form>
 
@@ -48,7 +46,6 @@ header('Access-Control-Expose-Headers: X-Events');
     <?php
 
     if (!isset($_SESSION['movieList'])) {
-        echo "movieList not in array";
         $_SESSION['movieList'] = [
             5 => new Movie(5, "Le chimpanzé", 2003, "Jack Sparrow", "Aventure", "Le drôle de singe débarque à vos écrans")
             ,
@@ -57,7 +54,7 @@ header('Access-Control-Expose-Headers: X-Events');
             2 => new Movie(2, "Le dernier des chimpanzés", 2021, "Eventail de ciseaux", "Science fiction", "Il est finalement de retour")
         ];
     }
-    echo "<ul class='list-inline'>";
+    echo "<ul class='row'>";
 
     foreach ($_SESSION['movieList'] as $movie) {
         $movie -> render();
