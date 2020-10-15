@@ -26,19 +26,20 @@ known_film = set()
 
 def get_characters(film):
     credits_req = requests.get('https://api.themoviedb.org/3/movie/%d/credits?api_key=cebba78ab23504d003715baf10955b9e' % film['id']).content.decode()
-    credits = json.loads(credits_req);
+    credits = json.loads(credits_req)
 
     persons = {'actors': [] }
-
-    for person in credits['cast']:
-        person_details_req = requests.get('https://api.themoviedb.org/3/person/%d?api_key=cebba78ab23504d003715baf10955b9e' % person['id']).content.decode()
-        persons['actors'].append(json.loads(person_details_req))
-
     for person in credits['crew']:
         if person['job'] == 'Producer':
             producer_req = requests.get('https://api.themoviedb.org/3/person/%d?api_key=cebba78ab23504d003715baf10955b9e' % person['id']).content.decode()
             persons['producer'] = json.loads(producer_req)
             break
+
+    for person in credits['cast']:
+        person_details_req = requests.get('https://api.themoviedb.org/3/person/%d?api_key=cebba78ab23504d003715baf10955b9e' % person['id']).content.decode()
+        persons['actors'].append(json.loads(person_details_req))
+
+
 
     return persons
 
@@ -114,7 +115,6 @@ class Charger(threading.Thread):
 
                     for c in characters['actors']:
                         add_person(c)
-
                         sql_string += "insert into JOUE values(%d,%d);\n" % (c['id'], f['id'])
 
                     if 'producer' in characters:
@@ -123,7 +123,7 @@ class Charger(threading.Thread):
                 else:
                     print("Film déjà rencontré")
 
-workers = [Charger(1, 25), Charger(26, 50), Charger(51, 75), Charger(76, 100)]
+workers = [Charger(1, 5), Charger(6, 10), Charger(11, 16), Charger(17, 23)]
 #workers = [Charger(1, 2), Charger(3, 4) ]
 for i in range(1, len(workers) + 1):
     workers[i - 1].start()
