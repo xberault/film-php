@@ -20,26 +20,49 @@ header('Access-Control-Expose-Headers: X-Events');
     <script src="https://kit.fontawesome.com/56083ee0c6.js" crossorigin="anonymous"></script>
 </head>
 <header class="bg-info shadow-sm">
-        <h1> FlixTube </h1>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">TubeFlix</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Auteur</a>
+                </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Genre</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="src/filter.php" method="get">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <select  name="filter" class="browser-default custom-select m-1">
+                    <option value="" disabled>Trier par</option>
+                    <option value="titre" <?php echo (isset($_GET['filter']) && $_GET['filter'] === 'titre') ? 'selected' : ''; ?>>
+                        titre
+                    </option>  <!-- allow to save the previous user selected choice selected -->
+                    <option value="date" <?php echo (isset($_GET['filter']) && $_GET['filter'] === 'date') ? 'selected' : ''; ?>>
+                        date
+                    </option>
+                    <option value="auteur" <?php echo (isset($_GET['filter']) && $_GET['filter'] === 'auteur') ? 'selected' : ''; ?>>
+                        auteur
+                    </option>
+                </select>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
 </header>
 <body class="text-left">
 <main class='container'>
 
     <form class="form-group w-25" method="get" action="src/filter.php">
-        <input class="form-control" type="text" name="query" />
-        <select  name="filter">
-            <option value="" disabled>Trier par</option>
-            <option value="titre" <?php echo (isset($_GET['filter']) && $_GET['filter'] === 'titre') ? 'selected' : ''; ?>>
-                titre
-            </option>  <!-- allow to save the previous user selected choice selected -->
-            <option value="date" <?php echo (isset($_GET['filter']) && $_GET['filter'] === 'date') ? 'selected' : ''; ?>>
-                date
-            </option>
-            <option value="auteur" <?php echo (isset($_GET['filter']) && $_GET['filter'] === 'auteur') ? 'selected' : ''; ?>>
-                auteur
-            </option>
-            <input class="btn-secondary" type="submit" value="search">
-        </select>
+
     </form>
 
 

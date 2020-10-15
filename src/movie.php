@@ -9,7 +9,7 @@ class Movie{
     private $desc;
     private $img;
 
-    public function __construct($id, $title, $date, $author, $gender,$desc="", $img=""){
+    public function __construct($id, $title, $date, $author, $gender,$desc="", $img="https://c7.uihere.com/files/881/56/853/film-computer-icons-screenwriter-download-png-movie-icon.jpg"){
         $this->id = $id;
         $this->title = $title;
         $this->date = $date;
@@ -22,7 +22,7 @@ class Movie{
     public function render(){   // fix heredox iut bug
         echo <<<EOF
         <li id="{$this->id}" class="column card m-2" style="width:17rem;">
-            <img class="card-img-top" src="https://c7.uihere.com/files/881/56/853/film-computer-icons-screenwriter-download-png-movie-icon.jpg" alt="Card image cap">
+            <img class="card-img-top" src="{$this->img}" alt="Card image cap">
             <section class="card-body">
                 <a class="btn float-right" href="src/delete.php?id={$this->id}" onclick="return confirm('Etes-vous sûr de vouloir le supprimer ?');">
                     <i class="far fa-trash-alt"></i>
