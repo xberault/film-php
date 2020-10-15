@@ -25,15 +25,15 @@ CREATE TABLE PERSONNE (
 CREATE TABLE JOUE (
     idPersonne INT,
     idFilm INT,
-    CONSTRAINT pkJoue PRIMARY KEY (idPersonne,idFilm)
-    -- CONSTRAINT fkIdPersonneJ FOREIGN KEY (idPersonne) REFERENCES PERSONNE (idPersonne),
-    -- CONSTRAINT fkIdFilmJ FOREIGN KEY (idFilm) REFERENCES FILM (idFilm)
+    CONSTRAINT pkJoue PRIMARY KEY (idPersonne,idFilm),
+    CONSTRAINT fkIdPersonneJ FOREIGN KEY (idPersonne) REFERENCES PERSONNE (idPersonne),
+    CONSTRAINT fkIdFilmJ FOREIGN KEY (idFilm) REFERENCES FILM (idFilm)
 );
 
 CREATE TABLE REALISE (
     idPersonne INT,
     idFilm INT,
-    CONSTRAINT pkJoue PRIMARY KEY (idPersonne,idFilm)
-    -- CONSTRAINT fkIdPersonneR FOREIGN KEY (idPersonne) REFERENCES PERSONNE (idPersonne),
-    -- CONSTRAINT fkIdFilmR FOREIGN KEY (idFilm) REFERENCES FILM (idFilm)
+    CONSTRAINT pkJoue PRIMARY KEY (idPersonne,idFilm),
+    CONSTRAINT fkIdPersonneR FOREIGN KEY (idPersonne) REFERENCES PERSONNE (idPersonne),
+    CONSTRAINT fkIdFilmR FOREIGN KEY (idFilm) REFERENCES FILM (idFilm)
 );
