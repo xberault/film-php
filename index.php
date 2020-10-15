@@ -2,6 +2,10 @@
 // be sure to require before session start ;)
 include_once 'src/movie.php';    // name date author gender
 
+require_once "server/connexion.php";
+
+$connexion = connect_bd(); 
+
 session_set_cookie_params('15');  // keep session opened for 15 seconds
 session_start(); // session start allow to save data so always in first
 
@@ -46,13 +50,27 @@ header('Access-Control-Expose-Headers: X-Events');
     <?php
 
     if (!isset($_SESSION['movieList'])) {
-        $_SESSION['movieList'] = [
-            5 => new Movie(5, "Le chimpanzé", 2003, "Jack Sparrow", "Aventure", "Le drôle de singe débarque à vos écrans")
-            ,
-            1 => new Movie(1, "L'attaque des singes", 1998, "Bobine de fer", "Apocalyptique", "Faites gaffe à vous")
-            ,
-            2 => new Movie(2, "Le dernier des chimpanzés", 2021, "Eventail de ciseaux", "Science fiction", "Il est finalement de retour")
-        ];
+
+        $showFilm = "SELECT idFilm, titreFilm, nom, prenom, genre, synopsis FROM FILM NATURAL JOIN REALISE NATURAL JOIN PERSONNE limit 100";
+   
+    $requette = $connexion->query($showFilm);
+    if(!$requette){
+        echo "soucis dans la requette des films";
+    }
+    else{
+        $_SESSION['movieList']= [];
+        foreach ($requette as $row){
+            $temp = new Movie($row['idFilm'],$row['titreFilm'],$row['dateRealisation'],$row['prenom']." ".$row['nom'],$row['genre'],$row['synopsis']);
+            array_push($_SESSION['movieList'], $temp);
+        }
+    }
+        // $_SESSION['movieList'] = [
+        //     5 => new Movie(5, "Le chimpanzé", 2003, "Jack Sparrow", "Aventure", "Le drôle de singe débarque à vos écrans")
+        //     ,
+        //     1 => new Movie(1, "L'attaque des singes", 1998, "Bobine de fer", "Apocalyptique", "Faites gaffe à vous")
+        //     ,
+        //     2 => new Movie(2, "Le dernier des chimpanzés", 2021, "Eventail de ciseaux", "Science fiction", "Il est finalement de retour")
+        // ];
     }
     echo "<ul class='row'>";
 
