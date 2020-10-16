@@ -6,20 +6,20 @@ DROP TABLE IF EXISTS FILM;
 
 CREATE TABLE FILM (
     idFilm INT PRIMARY KEY,
-    titreFilm VARCHAR(50),
-    synopsis VARCHAR(255),
+    titreFilm VARCHAR(100),
+    synopsis VARCHAR(1000),
     dateRealisation DATE,
-    genre VARCHAR(50),
-    posterPath VARCHAR(200)
+    genre VARCHAR(100),
+    posterPath VARCHAR(4000)
 );
 
 CREATE TABLE PERSONNE (
     idPersonne INT PRIMARY KEY,
-    nom INT,
-    prenom VARCHAR(50),
+    nom Varchar(100),
+    prenom VARCHAR(100),
     sexe VARCHAR(12),
     dateNaissance DATE,
-    biographie VARCHAR(4000)
+    biographie VARCHAR(8000)
 );
 
 CREATE TABLE JOUE (
@@ -33,7 +33,7 @@ CREATE TABLE JOUE (
 CREATE TABLE REALISE (
     idPersonne INT,
     idFilm INT,
-    CONSTRAINT pkJoue PRIMARY KEY (idPersonne,idFilm),
+    CONSTRAINT pkRealise PRIMARY KEY (idPersonne,idFilm),
     CONSTRAINT fkIdPersonneR FOREIGN KEY (idPersonne) REFERENCES PERSONNE (idPersonne),
     CONSTRAINT fkIdFilmR FOREIGN KEY (idFilm) REFERENCES FILM (idFilm)
 );
