@@ -24,7 +24,7 @@ class Movie{
         <li id="{$this->id}" class="column card m-2" style="width:17rem;">
             <img class="card-img-top" src="{$this->img}" alt="Card image cap">
             <section class="card-body">
-                <a class="btn float-right" href="src/delete.php?id={$this->id}" onclick="return confirm('Etes-vous sûr de vouloir le supprimer ?');">
+                <a class="btn float-right" href="../src/delete.php?id={$this->id}" onclick="return confirm('Etes-vous sûr de vouloir le supprimer ?');">
                     <i class="far fa-trash-alt"></i>
                 </a>
                 <a type="button" class="btn float-right" href="src/editForm.php?id={$this->id}" method="get" >
