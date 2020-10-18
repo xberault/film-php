@@ -44,22 +44,6 @@
                         <a class="nav-link" href="genre.php">Genre</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0" action="../src/filter.php" method="get">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <select  name="filter" class="browser-default custom-select m-1">
-                        <option value="" disabled>Trier par</option>
-                        <option value="titre" <?php echo (isset($_GET['filter']) && $_GET['filter'] === 'titre') ? 'selected' : ''; ?>>
-                            title
-                        </option>  <!-- allow to save the previous user selected choice selected -->
-                        <option value="date" <?php echo (isset($_GET['filter']) && $_GET['filter'] === 'date') ? 'selected' : ''; ?>>
-                            date
-                        </option>
-                        <option value="auteur" <?php echo (isset($_GET['filter']) && $_GET['filter'] === 'auteur') ? 'selected' : ''; ?>>
-                            Producer
-                        </option>
-                    </select>
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
             </div>
         </nav>
     </header>

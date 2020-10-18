@@ -121,22 +121,28 @@
                 $_SESSION['genre']= "Action";
             }
 
-            $connexion = connect_bd();
+            if(!$_SESSION['type'] or !($_SESSION['type'] == $_SESSION['genre'])){
+                $_SESSION['type'] = $_SESSION['genre'];
 
-            $showFilm = "SELECT idFilm, titreFilm, dateRealisation, nom, prenom, genre, synopsis, posterPath FROM FILM NATURAL JOIN REALISE NATURAL JOIN PERSONNE WHERE genre='".$_SESSION['genre']."' limit 10000";
-    
-            $requette = $connexion->query($showFilm);
-            if(!$requette){
-                echo "soucis dans la requette des films";
-            }
-            else{
-                $_SESSION['movieList']= [];
-                foreach ($requette as $row){
-                    $_SESSION['movieList'][$row['idFilm']] = new Movie($row['idFilm'],$row['titreFilm'],date_format(date_create($row['dateRealisation']),'F Y'),$row['prenom']." ".$row['nom'],$row['genre'],$row['synopsis'],$row['posterPath']);
+                $connexion = connect_bd();
+
+                $showFilm = "SELECT idFilm, titreFilm, dateRealisation, nom, prenom, genre, synopsis, posterPath FROM FILM NATURAL JOIN REALISE NATURAL JOIN PERSONNE WHERE genre='".$_SESSION['genre']."' limit 10000";
+        
+                $requette = $connexion->query($showFilm);
+                if(!$requette){
+                    echo "soucis dans la requette des films";
                 }
+                else{
+                    $_SESSION['movieList']= [];
+                    foreach ($requette as $row){
+                        $_SESSION['movieList'][$row['idFilm']] = new Movie($row['idFilm'],$row['titreFilm'],date_format(date_create($row['dateRealisation']),'F Y'),$row['prenom']." ".$row['nom'],$row['genre'],$row['synopsis'],$row['posterPath']);
+                    }
+                }
+
+                $connexion = null;
+
             }
 
-            $connexion = null;
             echo "<ul class='row'>";
 
             foreach ($_SESSION['movieList'] as $id => $movie) {

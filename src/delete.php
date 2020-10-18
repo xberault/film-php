@@ -1,11 +1,13 @@
 <?php
+
+require_once"../bd/fixBDD.php";
 session_start();
 
 if (isset($_GET['index_edit_id'])) {
-    $delete_id = raw_input($_GET['index_edit_id']);
-    unset($_SESSION['movieList'][$_GET['index_edit_id']]);
-    // $sql = "DELETE FROM MOVIE WHERE  id='$delete_id';
-    //$run=mysqli_query($con,$sql);
+    $prepSuprJoue="DELETE FROM JOUE WHERE idFilm='".$_GET["index_edit_id"]."'";
+    $prepSuprReal="DELETE FROM REALISE WHERE idFilm='".$_GET["index_edit_id"]."'";
+    $prepSuprFilm="DELETE FROM FILM WHERE idFilm='".$_GET["index_edit_id"]."'";
+    correction_db();
 }
 
 header("location:../index.php");        // always go back there
