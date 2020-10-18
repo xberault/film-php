@@ -3,6 +3,7 @@
     include_once 'src/movie.php';    // name date author gender
 
     require_once "bd/connexion.php";
+    require_once "bd/fixBDD.php"; correction_db();
 
     session_set_cookie_params('15');  // keep session opened for 15 seconds
     session_start(); // session start allow to save data so always in first
