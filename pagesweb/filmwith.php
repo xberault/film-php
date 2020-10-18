@@ -1,6 +1,6 @@
 <?php
     // be sure to require before session start ;)
-    include_once '../src/person.php';    // name date author gender
+    include_once '../src/movie.php';    // name date author gender
 
     require_once "../bd/connexion.php";
 
@@ -11,8 +11,8 @@
     header('Access-Control-Allow-Credentials: true');
     header('Access-Control-Allow-Methods: GET');
     header('Access-Control-Expose-Headers: X-Events');
-
-    $_SESSION["actual"]  = "pagesweb/realisateur.php";
+    
+    $_SESSION["actual"]  = "pagesweb/film.php";
 
 ?>
 <!doctype html>
@@ -31,20 +31,20 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="film.php">Films </a>
+                        <a class="nav-link" href="film.php">Films</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="realisateur.php">Producer </a>
+                        <a class="nav-link" href="realisateur.php">Producer</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="acteur.php">Actor <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="acteur.php">Actor </a>
                     </li>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="genre.php">Genre</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0" action="src/filter.php" method="get">
+                <form class="form-inline my-2 my-lg-0" action="../src/filter.php" method="get">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <select  name="filter" class="browser-default custom-select m-1">
                         <option value="" disabled>Trier par</option>
@@ -66,33 +66,34 @@
     <body class="text-left">
         <main class='container'>
 
-        <?php
+            <form class="form-group w-25" method="get" action="src/filter.php">
 
-            // if (!isset($_SESSION['producerList'])) {
-            if (true) {
+            </form>
 
-                $connexion = connect_bd();
 
-                $showRealisateur = "SELECT distinct idPersonne, nom, prenom, sexe, dateNaissance, biographie FROM PERSONNE NATURAL JOIN JOUE order by nom,prenom limit 1000";
-        
-                $requette = $connexion->query($showRealisateur);
-                if(!$requette){
-                    echo "soucis dans la requette des films";
-                }
-                else{
-                    $_SESSION['producerList']= [];
-                    foreach ($requette as $row){
-                        $temp = new Person($row['idPersonne'],$row['nom'],$row['prenom'],$row['sexe'],date_format(date_create($row['dateNaissance']),' d F Y'),$row['biographie'],"actor");
-                        array_push($_SESSION['producerList'], $temp);
-                    }
-                }
+            <?php
 
-                $connexion = null;
+            $connexion = connect_bd();
+
+            $showFilm = "SELECT idFilm, titreFilm, dateRealisation, nom, prenom, genre, synopsis, posterPath FROM FILM NATURAL JOIN JOUE NATURAL JOIN PERSONNE where idPersonne='".$_REQUEST['id']."'limit 100000";
+    
+            $requette = $connexion->query($showFilm);
+            if(!$requette){
+                echo "soucis dans la requette des films";
             }
+            else{
+                $_SESSION['movieList']= [];
+                foreach ($requette as $row){
+                    $_SESSION['movieList'][$row['idFilm']] = new Movie($row['idFilm'],$row['titreFilm'],date_format(date_create($row['dateRealisation']),'F Y'),$row['prenom']." ".$row['nom'],$row['genre'],$row['synopsis'],$row['posterPath']);
+                }
+            }
+
+            $connexion = null;
+
             echo "<ul class='row'>";
 
-            foreach ($_SESSION['producerList'] as $realisateur) {
-                $realisateur -> render();
+            foreach ($_SESSION['movieList'] as $id => $movie) {
+                $movie -> render();
             }
             echo "</ul>";
 

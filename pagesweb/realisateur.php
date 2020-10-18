@@ -1,6 +1,6 @@
 <?php
     // be sure to require before session start ;)
-    include_once '../src/producer.php';    // name date author gender
+    include_once '../src/person.php';    // name date author gender
 
     require_once "../bd/connexion.php";
 
@@ -82,7 +82,7 @@
                 else{
                     $_SESSION['producerList']= [];
                     foreach ($requette as $row){
-                        $temp = new Producer($row['idPersonne'],$row['nom'],$row['prenom'],$row['sexe'],date_format(date_create($row['dateNaissance']),' d F Y'),$row['biographie']);
+                        $temp = new Person($row['idPersonne'],$row['nom'],$row['prenom'],$row['sexe'],date_format(date_create($row['dateNaissance']),' d F Y'),$row['biographie'],"producer");
                         array_push($_SESSION['producerList'], $temp);
                     }
                 }

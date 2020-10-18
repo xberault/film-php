@@ -1,6 +1,6 @@
 <?php
 
-class Producer{
+class Person{
     private $id;
     private $nom;
     private $prenom;
@@ -8,13 +8,14 @@ class Producer{
     private $dateNais;
     private $bio;
 
-    public function __construct($id, $nom, $prenom, $sexe, $dateNais,$bio){
+    public function __construct($id, $nom, $prenom, $sexe, $dateNais,$bio,$role){
         $this->id = $id;
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->sexe = $sexe;
         $this->dateNais = $dateNais;
         $this->bio = $bio;
+        $this->role = $role;
     }
 
     public function render(){   // fix heredox iut bug
@@ -30,6 +31,23 @@ class Producer{
                 <h5 class="card-title" ><b>{$this->nom} {$this->prenom}</b> </h5>
                 <p class="card-text">was born on {$this->dateNais}</p>
                 <p class="card-text"> {$this->bio}</p>
+        EOF;
+                if($this->role == 'producer'){
+                    echo <<<EOF
+                    <a type="button" class="btn float-right" href="../pagesweb/filmby.php?id={$this->id}" method="get" >
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    EOF;
+                }
+                else{
+                    echo <<<EOF
+                    <a type="button" class="btn float-right" href="../pagesweb/filmwith.php?id={$this->id}" method="get" >
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    EOF;
+                }
+
+                echo <<<EOF
             </section>
         </li>
 EOF;

@@ -34,10 +34,10 @@
                         <a class="nav-link" href="pagesweb/film.php">Films</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pagesweb/film.php">Producer</a>
+                        <a class="nav-link" href="pagesweb/realisateur.php">Producer</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="acteur.php">Actor </a>
+                        <a class="nav-link" href="pagesweb/acteur.php">Actor </a>
                     </li>
                     </li>
                     <li class="nav-item">
