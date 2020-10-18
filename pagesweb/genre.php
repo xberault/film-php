@@ -1,8 +1,8 @@
 <?php
     // be sure to require before session start ;)
-    include_once 'src/movie.php';    // name date author gender
+    include_once '../src/movie.php';    // name date author gender
 
-    require_once "bd/connexion.php";
+    require_once "../bd/connexion.php";
 
     // $connexion = connect_bd(); 
 
@@ -24,7 +24,7 @@
     </head>
     <header class="bg-info shadow-sm">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href=""><b>Tube</b>Flix <span class="sr-only">(current)</span></a>
+            <a class="navbar-brand" href="../"><b>Tube</b>Flix</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,14 +32,14 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="pagesweb/film.php">Films</a>
+                        <a class="nav-link" href="film.php">Films</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pagesweb/film.php">Producer</a>
+                        <a class="nav-link" href="realisateur.php">Producer</a>
                     </li>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pagesweb/film.php">Genre</a>
+                        <a class="nav-link" href="genre.php">Genre <span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0" action="src/filter.php" method="get">
@@ -64,7 +64,7 @@
     <body class="text-left">
         <main class='container'>
 
-            <p>Travail sur acceuil a faire</p>
+        <p>Travail sur genre a faire</p>
 
         </main>
     </body>

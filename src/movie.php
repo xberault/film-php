@@ -31,56 +31,57 @@ class Movie{
                     <i class="fas fa-edit"></i>
                 </a>
                 <h5 class="card-title" ><b>{$this->title}</b> </h5>
-                <p class="card-text"><em>{$this->author}</em> en {$this->date}</p>
+                <p class="card-text">by <em>{$this->author}</em> published in {$this->date}</p>
+                <p class="card-text"> {$this->gender}</p>
                 <p class="card-text"> {$this->desc}</p>
             </section>
         </li>
 EOF;
     }
 
-    public function getTitle()
-    {
-        return $this-> title;
-    }
+    // public function getTitle()
+    // {
+    //     return $this-> title;
+    // }
 
-    /**
-     * @return int
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
+    // /**
+    //  * @return int
+    //  */
+    // public function getDate()
+    // {
+    //     return $this->date;
+    // }
 
-    /**
-     * @return mixed
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
+    // /**
+    //  * @return mixed
+    //  */
+    // public function getAuthor()
+    // {
+    //     return $this->author;
+    // }
 
-    /**
-     * @return mixed
-     */
-    public function getGender()
-    {
-        return $this->gender;
-    }
+    // /**
+    //  * @return mixed
+    //  */
+    // public function getGender()
+    // {
+    //     return $this->gender;
+    // }
 
-    /**
-     * @return string
-     */
-    public function getDesc()
-    {
-        return $this->desc;
-    }
+    // /**
+    //  * @return string
+    //  */
+    // public function getDesc()
+    // {
+    //     return $this->desc;
+    // }
 
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+    // /**
+    //  * @return int
+    //  */
+    // public function getId()
+    // {
+    //     return $this->id;
+    // }
 }
 ?>

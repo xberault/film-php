@@ -1,8 +1,8 @@
 <?php
     // be sure to require before session start ;)
-    include_once 'src/movie.php';    // name date author gender
+    include_once '../src/producer.php';    // name date author gender
 
-    require_once "bd/connexion.php";
+    require_once "../bd/connexion.php";
 
     // $connexion = connect_bd(); 
 
@@ -24,7 +24,7 @@
     </head>
     <header class="bg-info shadow-sm">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href=""><b>Tube</b>Flix <span class="sr-only">(current)</span></a>
+            <a class="navbar-brand" href="../"><b>Tube</b>Flix</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,14 +32,14 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="pagesweb/film.php">Films</a>
+                        <a class="nav-link" href="film.php">Films </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pagesweb/film.php">Producer</a>
+                        <a class="nav-link" href="realisateur.php">Producer <span class="sr-only">(current)</span></a>
                     </li>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pagesweb/film.php">Genre</a>
+                        <a class="nav-link" href="genre.php">Genre</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0" action="src/filter.php" method="get">
@@ -64,7 +64,37 @@
     <body class="text-left">
         <main class='container'>
 
-            <p>Travail sur acceuil a faire</p>
+        <?php
+
+            if (!isset($_SESSION['producerList'])) {
+            // if (true) {
+
+                $connexion = connect_bd();
+
+                $showRealisateur = "SELECT idPersonne, nom, prenom, sexe, dateNaissance, biographie FROM PERSONNE NATURAL JOIN REALISE limit 100";
+        
+                $requette = $connexion->query($showRealisateur);
+                if(!$requette){
+                    echo "soucis dans la requette des films";
+                }
+                else{
+                    $_SESSION['producerList']= [];
+                    foreach ($requette as $row){
+                        $temp = new Producer($row['idPersonne'],$row['nom'],$row['prenom'],$row['sexe'],date_format(date_create($row['dateNaissance']),' d F Y'),$row['biographie']);
+                        array_push($_SESSION['producerList'], $temp);
+                    }
+                }
+
+                $connexion = null;
+            }
+            echo "<ul class='row'>";
+
+            foreach ($_SESSION['producerList'] as $realisateur) {
+                $realisateur -> render();
+            }
+            echo "</ul>";
+
+            ?>
 
         </main>
     </body>
