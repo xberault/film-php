@@ -1,6 +1,6 @@
 <html>
 <?php
-require_once "../bd/connexion.php";
+require_once "connexion.php";
 
 function correction_db(){
         $connexion = connect_bd();
