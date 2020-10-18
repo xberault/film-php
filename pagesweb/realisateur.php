@@ -4,8 +4,6 @@
 
     require_once "../bd/connexion.php";
 
-    // $connexion = connect_bd(); 
-
     session_set_cookie_params('15');  // keep session opened for 15 seconds
     session_start(); // session start allow to save data so always in first
 
@@ -14,12 +12,13 @@
     header('Access-Control-Allow-Methods: GET');
     header('Access-Control-Expose-Headers: X-Events');
 
+    $_SESSION["actual"]  = "pagesweb/realisateur.php";
+
 ?>
 <!doctype html>
 <html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="index.css">
         <script src="https://kit.fontawesome.com/56083ee0c6.js" crossorigin="anonymous"></script>
     </head>
     <header class="bg-info shadow-sm">
@@ -36,6 +35,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="realisateur.php">Producer <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="acteur.php">Actor </a>
                     </li>
                     </li>
                     <li class="nav-item">
@@ -66,12 +68,12 @@
 
         <?php
 
-            if (!isset($_SESSION['producerList'])) {
-            // if (true) {
+            // if (!isset($_SESSION['producerList'])) {
+            if (true) {
 
                 $connexion = connect_bd();
 
-                $showRealisateur = "SELECT idPersonne, nom, prenom, sexe, dateNaissance, biographie FROM PERSONNE NATURAL JOIN REALISE limit 100";
+                $showRealisateur = "SELECT distinct idPersonne, nom, prenom, sexe, dateNaissance, biographie FROM PERSONNE NATURAL JOIN REALISE order by nom,prenom limit 10000";
         
                 $requette = $connexion->query($showRealisateur);
                 if(!$requette){

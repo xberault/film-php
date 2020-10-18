@@ -33,4 +33,4 @@ if (isset($_GET['filter'])) {
     //$keywords = $db->escape_string($_GET['filter']);
     //$query = $db->query("SELECT * FROM movie WHERE '%{filter}%' LIKE '%{filter}%' ");
 }
-header("location:../index.php?filter=" . $_GET['filter']);  // always go back there and keep record on the selected filter value
+header("location:../".$_SESSION['actual']."?filter=". $_GET['filter']);  // always go back there and keep record on the selected filter value

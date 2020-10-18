@@ -39,49 +39,49 @@ class Movie{
 EOF;
     }
 
-    // public function getTitle()
-    // {
-    //     return $this-> title;
-    // }
+    public function getTitle()
+    {
+        return $this-> title;
+    }
 
-    // /**
-    //  * @return int
-    //  */
-    // public function getDate()
-    // {
-    //     return $this->date;
-    // }
+    /**
+     * @return int
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
 
-    // /**
-    //  * @return mixed
-    //  */
-    // public function getAuthor()
-    // {
-    //     return $this->author;
-    // }
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
 
-    // /**
-    //  * @return mixed
-    //  */
-    // public function getGender()
-    // {
-    //     return $this->gender;
-    // }
+    /**
+     * @return mixed
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
 
-    // /**
-    //  * @return string
-    //  */
-    // public function getDesc()
-    // {
-    //     return $this->desc;
-    // }
+    /**
+     * @return string
+     */
+    public function getDesc()
+    {
+        return $this->desc;
+    }
 
-    // /**
-    //  * @return int
-    //  */
-    // public function getId()
-    // {
-    //     return $this->id;
-    // }
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }
 ?>
