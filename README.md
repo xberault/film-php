@@ -9,7 +9,7 @@ soit vous etes chez vous:
     - creer une base de données en localhost qui s'appel DBjacquet
     - creer un utilisateur root avec mdp root
     - executer le script bd/tables.sql
-    - executer le script film_insert.sql
+    - executer le script bd/film_insert.sql
 
 # pour lancer le projet
 ouvrir un terminal dans film-php puis taper

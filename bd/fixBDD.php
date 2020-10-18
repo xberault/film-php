@@ -4,6 +4,29 @@ require_once "../bd/connexion.php";
 
 $connexion = connect_bd();
 
+
+// on retire les personnes sans nom ou prenom
+$prepaAffich = "SELECT idPersonne FROM PERSONNE WHERE nom='' or prenom=''";
+
+$requette = $connexion->query($prepaAffich);
+
+if(!$requette){
+    echo "soucis dans la requette de fix des acteurs sans nom ou prenom";
+}
+else{
+    foreach ($requette as $row){
+        $id=intval($row[0]);
+        $prepaSupprJoue = "DELETE FROM JOUE WHERE idPersonne='".$id."'";
+        $prepaSupprRea = "DELETE FROM REALISE WHERE idPersonne='".$id."'";
+        $prepaSupprPers = "DELETE FROM PERSONNE WHERE idPersonne='".$id."'";
+        $connexion->exec($prepaSupprJoue);
+        $connexion->exec($prepaSupprRea);
+        $connexion->exec($prepaSupprPers);
+    }
+}
+
+
+// on retire les films qui ont ni réalisateur ni acteurs
 $prepaAffich = "SELECT idFilm FROM FILM WHERE idFilm NOT IN (SELECT DISTINCT idFilm FROM JOUE) and idFilm NOT IN (SELECT DISTINCT idFilm FROM REALISE)";
 
 $requette = $connexion->query($prepaAffich);
@@ -19,6 +42,8 @@ else{
     }
 }
 
+
+// on retire les films qui ont pas de réalisateur 
 $prepaAffich = "SELECT idFilm FROM FILM WHERE idFilm NOT IN (SELECT DISTINCT idFilm FROM REALISE)";
 
 $requette = $connexion->query($prepaAffich);
@@ -36,6 +61,8 @@ else{
     }
 }
 
+
+// on retire les personnes qui sont ni réalisateur ni acteur
 $prepaAffich = "SELECT idPersonne FROM PERSONNE WHERE idPersonne NOT IN (SELECT DISTINCT idPersonne FROM JOUE) and idPersonne NOT IN (SELECT DISTINCT idPersonne FROM REALISE)";
 
 $requette = $connexion->query($prepaAffich);
